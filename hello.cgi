@@ -1,28 +1,25 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
-use strict;
-use warnings;
-use CGI;
+use v5.36;
+use CGI::Tiny;
 
-# Create a new CGI object
-my $cgi = CGI->new();
+cgi {
+  # Get the CGI object
+  my $cgi = $_;
 
-# Get the value of the 'name' parameter
-my $name = $cgi->param('name');
+  # Get the value of the 'name' parameter
+  my $name = $cgi->param('name');
 
-# Default greeting message if 'name' parameter is not specified
-my $greeting = "Hello, CGI!";
+  # Customize greeting message if 'name' parameter is specified
+  my $greeting = CGI::Tiny::escape_html( 'Hello, ' . ( $name || 'CGI' ) . '!' );
 
-# Customize greeting message if 'name' parameter is specified
-if ($name) {
-    $greeting = "Hello, $name!";
+  # Print HTML response
+  $cgi->render( html => <<~"HTML");
+    <html>
+      <head><title>Hello CGI</title></head>
+      <body>
+        <h1>$greeting</h1>
+      </body>
+    </html>
+    HTML
 }
-
-# Print HTTP header with content type
-print $cgi->header('text/html');
-
-# Print HTML response
-print "<html><head><title>Hello CGI</title></head><body>";
-print "<h1>$greeting</h1>";
-print "</body></html>";
-
