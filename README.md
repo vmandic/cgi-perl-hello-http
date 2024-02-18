@@ -1,9 +1,9 @@
 # A simple CGI and Perl HTTP server
 
 I always wanted to see what is this about, so I read on Wikipedia about it
-and decided to ask ChatGPT to teach me about it an write some code.
+and decided to ask ChatGPT to teach me about it and write some code.
 
-This is a simple project to demonstrate processing of a GET web request to a
+This is a simple project to demonstrate the processing of a GET web request to a
 `.cgi` script file with an option to interpret a query string parameter
 with all of the joy of direct HTML ie. code injection through it.
 
